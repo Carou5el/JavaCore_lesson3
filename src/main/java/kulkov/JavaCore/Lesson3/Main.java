@@ -63,6 +63,8 @@ public class Main {
             System.out.printf("\nПопробуете ещё раз?\n(1 - да / 0 - нет)  ");
 
         } while (scanUser.nextInt() != 0);
+//        scanUser.reset();
+//        scanUser.close();
     }
 
     /**
@@ -87,12 +89,13 @@ public class Main {
 
         System.out.printf("Было загадано слово из представленных ниже. Отгадайте его.\n");
         OutputWordsArrayToConsole(words);
-
+//        scanUser.reset();
         do {
 
             // Ввод варианта пользователя.
             System.out.printf("Ваш ответ (выход - q): ");
-            userAnswer = scanUser.nextLine();
+//            userAnswer = scanUser.nextLine();
+            userAnswer = scanUser.next();
 
             // Обработка выигрыша.
             if (userAnswer.equals(resultWord))   {
@@ -153,16 +156,18 @@ public class Main {
         // Формирование 15-символьной маски.
         for (int i = 0; i < maskedCharsCount; i++)    {
 
-            if (userWord.charAt(markerBeginWord) == resultWord.charAt(markerBeginWord)) {
-                // Вывод совпадающего символа.
-                System.out.printf("%c", userWord.charAt(markerBeginWord));
-                // Сдвиг маркера на 1.
-                markerBeginWord++;
-                continue;
+            if ((i < userWord.length()) && (i < resultWord.length()))   {
 
-            } else {
-                System.out.printf("#");
+                if (userWord.charAt(markerBeginWord) == resultWord.charAt(markerBeginWord)) {
+                    // Вывод совпадающего символа.
+                    System.out.printf("%c", userWord.charAt(markerBeginWord));
+                    // Сдвиг маркера на 1.
+                    markerBeginWord++;
+                    continue;
+                }
             }
+            System.out.printf("#");
+
         }
 
         System.out.printf("\n");
